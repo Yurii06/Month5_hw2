@@ -1,4 +1,4 @@
-package com.geektech.month5_hw2
+package com.geektech.month5_hw2.remote
 
 import com.geektech.month5_hw2.model.LoveModel
 import retrofit2.Call

@@ -1,4 +1,4 @@
-package com.geektech.month5_hw2
+package com.geektech.month5_hw2.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
