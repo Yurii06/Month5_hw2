@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.geektech.month5_hw2.databinding.FragmentResultBinding
 import com.geektech.month5_hw2.model.LoveModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultFragment : Fragment() {
 
     private var _binding: FragmentResultBinding? = null
@@ -42,7 +44,7 @@ class ResultFragment : Fragment() {
 
     private fun initTextView() {
         with(binding) {
-            tvFirstName.text = loveModel?.firsName.toString()
+            tvFirstName.text = loveModel?.firstName.toString()
             tvSecondName.text = loveModel?.secondName.toString()
             tvPercentage.text = loveModel?.percentage.toString() + "%"
         }

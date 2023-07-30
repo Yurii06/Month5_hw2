@@ -5,19 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.geektech.month5_hw2.LoveViewModel
 import com.geektech.month5_hw2.R
+import com.geektech.month5_hw2.data.Pref
 import com.geektech.month5_hw2.databinding.FragmentCalculateBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoveCalculatorFragment : Fragment() {
 
     private var _binding: FragmentCalculateBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LoveViewModel by viewModels()
+    @Inject
+    lateinit var pref: Pref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +36,10 @@ class LoveCalculatorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!pref.isOnBoardSeen()) {
+            findNavController().navigate(R.id.onBoardFragment)
+        }
+
         initImage()
         initClickers()
 
@@ -41,14 +52,21 @@ class LoveCalculatorFragment : Fragment() {
     }
 
     private fun initClickers() {
-        with(binding) {
-            btnCalculate.setOnClickListener {
-                viewModel.getLiveData(etFirstName.text.toString(), etSecondName.text.toString())
-                    .observe(this@LoveCalculatorFragment) { loveModel ->
-                        findNavController().navigate(
-                            R.id.resultFragment,
-                            bundleOf(LOVEMODEL_KEY to loveModel)
-                        )
+        binding.btnCalculate.setOnClickListener {
+            if (binding.etFirstName.text.isNotEmpty() && binding.etSecondName.text.isNotEmpty()) {
+                viewModel.getLiveData(
+                    binding.etFirstName.text.toString(),
+                    binding.etSecondName.text.toString()
+                )
+                    .observe(requireActivity()) {
+                        if (it.error != null) {
+                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                        } else {
+                            findNavController().navigate(
+                                R.id.resultFragment,
+                                bundleOf(LOVEMODEL_KEY to it)
+                            )
+                        }
                     }
             }
         }

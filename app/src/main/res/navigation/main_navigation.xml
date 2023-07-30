@@ -15,4 +15,9 @@
         android:name="com.geektech.month5_hw2.ui.LoveCalculatorFragment"
         android:label="fragment_calculate"
         tools:layout="@layout/fragment_calculate" />
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.geektech.month5_hw2.ui.onboard.OnBoardingFragment"
+        android:label="OnBoardFragment"
+        tools:layout="@layout/fragment_on_boarding"/>
 </navigation>
