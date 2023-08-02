@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.geektech.month5_hw2.App
 import com.geektech.month5_hw2.LoveViewModel
 import com.geektech.month5_hw2.R
 import com.geektech.month5_hw2.data.Pref
@@ -23,6 +24,7 @@ class LoveCalculatorFragment : Fragment() {
     private var _binding: FragmentCalculateBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LoveViewModel by viewModels()
+
     @Inject
     lateinit var pref: Pref
 
@@ -52,6 +54,9 @@ class LoveCalculatorFragment : Fragment() {
     }
 
     private fun initClickers() {
+        binding.btnHistory.setOnClickListener {
+            findNavController().navigate(R.id.historyFragment)
+        }
         binding.btnCalculate.setOnClickListener {
             if (binding.etFirstName.text.isNotEmpty() && binding.etSecondName.text.isNotEmpty()) {
                 viewModel.getLiveData(
@@ -60,7 +65,8 @@ class LoveCalculatorFragment : Fragment() {
                 )
                     .observe(requireActivity()) {
                         if (it.error != null) {
-                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT)
+                                .show()
                         } else {
                             findNavController().navigate(
                                 R.id.resultFragment,
