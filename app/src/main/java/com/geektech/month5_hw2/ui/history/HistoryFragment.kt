@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.geektech.month5_hw2.LoveViewModel
 import com.geektech.month5_hw2.databinding.FragmentHistoryBinding
 import com.geektech.month5_hw2.ui.history.adapter.HistoryAdapter
@@ -16,8 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
-    private val adapter = HistoryAdapter()
+    private val adapter = HistoryAdapter(arrayListOf())
     private val viewModel: LoveViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,5 +32,14 @@ class HistoryFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
         adapter.addTasks(viewModel.getData())
+        initViewAlphabetically()
+    }
+
+    private fun initViewAlphabetically() {
+        with(binding){
+            viewModel.getAllAlphabetically().observe(this@HistoryFragment){
+                adapter.list = it
+            }
+        }
     }
 }

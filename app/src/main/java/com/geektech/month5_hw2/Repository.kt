@@ -13,6 +13,9 @@ import javax.inject.Inject
 class Repository @Inject constructor(private val api: LoveApi, private val dao: LoveDao) {
 
     fun getAllData() = dao.getAll()
+
+    fun getAllDataAlphabetically() = dao.getAllDataAlphabetically()
+
     fun getPercentage(firstName: String, secondName: String): MutableLiveData<LoveModel> {
         var liveData = MutableLiveData<LoveModel>()
         api.getPercentage(firstName, secondName)

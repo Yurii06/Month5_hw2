@@ -1,6 +1,7 @@
 package com.geektech.month5_hw2
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geektech.month5_hw2.model.LoveModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,4 +15,5 @@ class LoveViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     fun getData() = repository.getAllData()
+    fun getAllAlphabetically(): MutableLiveData<List<LoveModel>> = MutableLiveData(repository.getAllDataAlphabetically())
 }

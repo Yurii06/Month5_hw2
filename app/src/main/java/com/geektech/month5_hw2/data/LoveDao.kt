@@ -13,4 +13,7 @@ interface LoveDao {
 
     @Query("SELECT * FROM love_table")
     fun getAll() : List<LoveModel>
+
+    @Query("SELECT * FROM love_table ORDER BY firstName ASC")
+    fun getAllDataAlphabetically(): List<LoveModel>
 }

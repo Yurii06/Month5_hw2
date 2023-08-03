@@ -1,6 +1,7 @@
 package com.geektech.month5_hw2.ui.history.adapter
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.geektech.month5_hw2.databinding.ItemHistoryBinding
 import com.geektech.month5_hw2.model.LoveModel
 
-class HistoryAdapter : Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter(
+    var list: List<LoveModel>
+): Adapter<HistoryAdapter.HistoryViewHolder>() {
 
     private val listOfHistory = arrayListOf<LoveModel>()
 
