@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import com.geektech.month5_hw2.R
 import com.geektech.month5_hw2.databinding.ItemOnboardBinding
 import com.geektech.month5_hw2.model.OnBoard
 
@@ -14,22 +15,22 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
 
     val list = arrayListOf(
         OnBoard(
-            "https://w7.pngwing.com/pngs/221/349/png-transparent-love-test-calculator-love-calculator-android-android-thumbnail.png",
+            R.raw.animation_onboard1,
             "Вы одиноки?",
             "Может, вас кто-то ждет?"
         ),
         OnBoard(
-            "https://surveysparrow.com/wp-content/uploads/2021/10/employee-onboarding-survey-questions.png",
+            R.raw.animation_onboard2,
             "Наша цель!",
             "Сделать вас хоть немного счастливее"
         ),
         OnBoard(
-            "https://w7.pngwing.com/pngs/103/373/png-transparent-love-test-calculator-love-calculator-love-tester-deluxe-love-tester-machine-android-love-game-heart-thumbnail.png",
+            R.raw.animation_onboard3,
             "Хорошо проведите время",
             "Узнайте может быть кто то вам идеально подходит"
         ),
         OnBoard(
-            "https://w7.pngwing.com/pngs/349/138/png-transparent-love-calculator-computer-icons-valentine-s-day-valentine-s-day-love-purple-text-thumbnail.png",
+            R.raw.animation_onboard4,
             "Найдите свою пару",
             "Используйте наше приложение , мы посчитаем за вас"
         )
@@ -56,7 +57,7 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
 
         fun onBind(onBoard: OnBoard) {
             with(binding) {
-                ivOnboard.load(onBoard.image)
+                lottieAnimationView.setAnimation(onBoard.animation)
                 tvTitle.text = onBoard.title
                 tvDesc.text = onBoard.desc
                 binding.btnStart.isVisible = adapterPosition == list.lastIndex
